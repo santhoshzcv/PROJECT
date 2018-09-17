@@ -1,0 +1,48 @@
+<button class="btn btn-custom right" type="button" (click)="back()">Add Employee</button>
+<div class="row">
+<div class="input-field col s1">
+<input style="width:20%" type="text" [(ngModel)]="userFilter.office" placeholder="search by office"><br><br>
+<input style="width:20%" type="text" [(ngModel)]="userFilter1.name" placeholder="search  by name">
+</div>
+</div>
+
+<table class="striped">
+  <thead>
+    <tr>
+    <th style="width:20%">Name</th>
+    <th style="width:20%">Position</th>
+    <th style="width:20%">Office</th>
+    <th style="width:20%">Salary</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+   </thead>
+  <tbody>
+    <tr *ngFor="let emp of employeeService.employees | filterBy: userFilter  | filterBy: userFilter1 | paginate: { itemsPerPage: 5, currentPage: p }">
+      <td>{{emp.name}}</td>
+      <td>{{emp.position}}</td>
+      <td>{{emp.office}}</td>
+      <td>{{emp.salary}}</td>
+      <td>
+          <a class="action-btn" (click)="onEdit(emp._id)">
+              <i class="material-icons">edit</i>
+            </a>
+          </td>
+      <td>
+        <a class="action-btn" (click)="onDelete(emp._id)">
+            <i class="material-icons">delete</i>
+          </a>
+      </td>
+      <li *ngIf="(employeeService.employees | filterBy: userFilter | filterBy: userFilter1 ).length === 0">No matching elements</li>
+    </tr>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </tbody>
+</table>
+
+    <!-- <iframe width="453" height="480" src="//www.youtube.com/embed/bGTA7NEeN5o?rel=0" frameborder="0" allowfullscreen></iframe> -->
+    <!-- <iframe width="453" height="480" src="//www.youtube.com/embed/kiuVtSg4DS8?rel=0" frameborder="0" allowfullscreen></iframe> -->
+    <!-- <iframe width="453" height="480" src="//www.youtube.com/embed/_JVghQCWnRI?rel=0" frameborder="0" allowfullscreen></iframe> -->
+    <!-- <iframe width="453" height="480" src="//www.youtube.com/embed/pDhHQsbZ820?rel=0" frameborder="0" allowfullscreen></iframe> -->
+    
+  
+
